@@ -7,10 +7,10 @@ class ForestType(Resource):
     climate={'Moist tropical forest':'Hot','Dry tropical forest':'Arid','Alpine forest':'Cold','Monatane temperte forest':'warm','Montaine sub tropical forest':'Cool'}
     data = {
     'Moist tropical forest' : {
-        'humidity' : 'very high',
+        'humidity' : 'veryHigh',
         'temp' : 'high',
-        'rainfall' : 'very high',
-        'elevaion' : 'very low'
+        'rainfall' : 'veryHigh',
+        'elevaion' : 'veryLow'
         },
     'Dry tropical forest' : {
         'humidity' : 'low',
@@ -32,15 +32,15 @@ class ForestType(Resource):
         'elevaion' : 'medium'
     },    
     'Alpine forest':{
-        'humidity' : 'very low',
-        'temp' : 'very low',
-        'rainfall' : 'very low',
-        'elevaion' : 'very high'
+        'humidity' : 'veryLow',
+        'temp' : 'veryLow',
+        'rainfall' : 'veryLow',
+        'elevaion' : 'veryHigh'
         
     }
     }
     keys = ['humidity', 'temp', 'rainfall', 'elevation']
-    values = ['very high', 'high', 'medium', 'low', 'very low']
+    values = ['veryHigh', 'high', 'medium', 'low', 'veryLow']
     solutions = {'Alpine Forest':'As alpine forests are mostly chopped to use their long straight wood. Selective logging is a method that can be used to meet the needs of both the forests and humans seeking economical resources. Selective logging is the removal of trees within a stand based on size limitations. This technique allows for forest regeneration to occur between and after the selective harvest cycles.',
                  'Dry Tropical forest':'Site water management also plays an essential role in site preparation in certain areas. If drainage is not considered in some low-lying afforestation lands, the afforestation will fail.Flooding is a treatment that use channel or dikes to guide the water from afforestation site with high moisture, like coastal and riparian lands, shrimp ponds, swamps. Flooding or irrigation also can reduce the salt and alkali content of saline soil . Irrigation is an essential way in improving site water conditions in water-deficient areas, such as the Middle East, South Africa, China, India, especially for the cultivation of timber forests ',
                  'Moist Tropical Forest':'Building blocks for tropical rainforest conservation include ecotourism and rehabilitation. Reforestation and restoration are common practices in certain areas to try to increase tropical rainforest density. By communicating with the local people living in, and around, the rainforest, conservationists can learn more about what might allow them to best focus their efforts.[1] Rainforests are globally important to sustainability and preservation of biodiversity. Although they may vary in location and inhabited species of plants and animals, they remain important worldwide for their abundance of natural resources and for the ecosystem services. It is important to take into consideration the differing species and the biodiversity that exists across different rainforest types in order to accurately implement methods of conservation',
@@ -51,10 +51,10 @@ class ForestType(Resource):
 
     def get(self,humidity,temp,rainfall,elevation):
          user_input = {
-            'humidity' : 'low',
-            'temp' : 'high',
-            'rainfall' : 'low',
-            'elevaion' : 'very high'}
+            'humidity' : humidity,
+            'temp' : temp,
+            'rainfall' : rainfall,
+            'elevaion' : elevation}
         
          grades = []
 
