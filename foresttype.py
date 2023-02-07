@@ -69,7 +69,8 @@ class ForestType(Resource):
             print('grade ' + str(grade))
             grades.append(grade)
          print(max(grades))
-         return {"ForestType":(list(self.data.keys())[grades.index(max(grades))]),"Solution":""}
+        forest = list(self.data.keys())[grades.index(max(grades))]
+         return {"ForestType":forest,"Solution":solutions[forest],"Climate" : climate[forest]}
         
 api.add_resource(ForestType,'/foresttype/<string:humidity>/<string:temp>/<string:rainfall>/<string:elevation>')
 if __name__ == "__main__":
