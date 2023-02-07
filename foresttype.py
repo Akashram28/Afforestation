@@ -1,10 +1,11 @@
 from flask import Flask
 from flask_restful import Api, Resource
+import math
 
 app = Flask(__name__)
 api = Api(app)
 class ForestType(Resource):
-    climate={'Moist tropical forest':'Hot','Dry tropical forest':'Arid','Alpine forest':'Cold','Monatane temperte forest':'warm','Montaine sub tropical forest':'Cool'}
+    climate={'Moist tropical forest':'Hot','Dry tropical forest':'Arid','Alpine forest':'Cold','Monatane temperte forest':'Warm','Montaine sub tropical forest':'Cool'}
     data = {
     'Moist tropical forest' : {
         'humidity' : 'very high',
@@ -72,10 +73,28 @@ class ForestType(Resource):
          return {"ForestType":(list(self.data.keys())[grades.index(max(grades))]),"Solution":""}
      
 class TreeDensity(Resource):
+    Trees={'Moist Tropical forest':{'Trees':{'Rosewood':40  ,'Bonsum':300} ,'Multiplier':1.2},'Dry Tropical forest':{'Trees':{'Acacia':40 ,'Sal':25},'Multiplier':0.8},
+                'Montane Temperte forest':{'Trees':{'Oak':60  ,'Maple':50} ,'Multiplier':1},'Montane Sub tropical forest':{'Trees':{"Cinnamon":60  ,'Sandal':40},'Multiplier':1},
+                'Alpine forest':{'Trees':{'Honey Suckle':20  ,'Black Juniper':17} ,'Multiplier':0.8}}
+    Plants={'Moist Tropical forest':{'Ferns','Gingers',"Bamboos"},'Dry Tropical forest':{'Cacti','Aloe'},'Montane Temperte forest':{'Ferns','Irises','Himalayan Blue Poppy'},'Montane Sub tropical forest':['Ferns','Orchids','Alocasia','Mosses'],'Alpine forest':['Ferns','Primulas','Himalayan Poppy','Himalayan Sunflowers']}
     def get(self,forest,area):
-        Plants={'Moist Tropical forest':{'Rosewood':40  ,'Bonsum':300 ,'Multiplier':1.2},'Dry Tropical forest':{'Acacia':40 ,'Sal':25,'Multiplier':0.8},
-                'Montane Temperte forest':{'Oak':60  ,'Maple':50   ,'Multiplier':1},'Montane Sub tropical forest':{"Cinnamon":60  ,'Sandal':40   ,'Multiplier':1},
-                'Alpine forest':{'Honey Suckle':20  ,'Black Juniper':17    ,'Multiplier':0.8}}
+        data = self.Trees[forest]
+        t1 = list(data['Trees'].keys())[0]
+        t2 = list(data['Trees'].keys())[1]
+        area_t1 = data['Trees'][t1]
+        area_t2 = data['Trees'][t2]
+        num_t1 = math.ceil(area_t2/(area_t1+area_t2)*area/area_t1*data['Multiplier'])
+        num_t2 = math.ceil(area_t1/(area_t1+area_t2)*area/area_t2*data['Multiplier'])
+        message = {
+            "Tree1" : {
+                'Name' : t1, 'Quantity' : num_t1, 'Area' : area_t1
+            },
+            "Tree2" : {
+                'Name' : t2, 'Quantity' : num_t2, 'Area' : area_t2
+            },
+        
+        }
+        return message
         
 api.add_resource(TreeDensity,'/treedensity/<string:forest>/<int:area>')
 api.add_resource(ForestType,'/foresttype/<string:humidity>/<string:temp>/<string:rainfall>/<string:elevation>')
