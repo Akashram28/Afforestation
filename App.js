@@ -187,21 +187,8 @@ function App() {
             </div>
             <div className="container2 ">
               <p>
-                Afforestation is a crucial aspect of environmental preservation
-                and sustainability. The process of planting trees in areas where
-                there was previously no forest provides numerous benefits to
-                both the environment and human communities. Firstly,
-                afforestation helps combat climate change by absorbing carbon
-                dioxide from the atmosphere, which is a major contributor to
-                global warming. Additionally, planting trees helps preserve
-                biodiversity by providing habitat for a wide range of wildlife
-                species. It also has a positive impact on air and water quality
-                by filtering pollutants and reducing soil erosion. Moreover,
-                afforestation provides numerous recreational opportunities and
-                can improve mental health by offering a peaceful and natural
-                environment for people to enjoy. These benefits demonstrate the
-                importance of afforestation and highlight the need for continued
-                efforts to protect and expand forests around the world.
+                Beginner Forester's Guide to Afforestation
+
               </p>
             </div>
           </div>
