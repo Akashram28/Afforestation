@@ -1,11 +1,7 @@
 import "./App.css";
 import { useState } from "react";
 import axios from "axios";
-import image1 from "./AlpineForest.png";
-import image2 from "./DryTropicalForest.png";
-import image3 from "./MontaneTemperteForest.png";
-import image4 from "./MontaneSubtropicalForest.png";
-import image5 from "./MositTropicalForest.png";
+import Image from "./image";
 
 function App() {
   const [fact1, setfact1] = useState("");
@@ -15,6 +11,16 @@ function App() {
   const [text, settext] = useState("");
   const [sol, setsol] = useState("");
   const [area, setarea] = useState("");
+  const [n1, setn1] = useState("");
+  const [a1, seta1] = useState("");
+  const [c1, setc1] = useState("");
+  const [n2, setn2] = useState("");
+  const [a2, seta2] = useState("");
+  const [c2, setc2] = useState("");
+  const [p1, setp1] = useState("");
+  const [p2, setp2] = useState("");
+  const [p3, setp3] = useState("");
+  const [p4, setp4] = useState("");
 
   const handleSubmit = () => {
     axios
@@ -128,34 +134,24 @@ function App() {
   const handleFinal = () => {
     axios
       .get("http://127.0.0.1:5000/treedensity/" + text + "/" + area)
-      .then((response) => {
-        console.log(response);
-        // settext(response.data.ForestType)
-        // setsol(response.data.Solution)
+      .then((response1) => {
+        console.log(response1);
+        setn1(response1.data.Tree1.Name);
+        seta1(response1.data.Tree1.Area);
+        setc1(response1.data.Tree1.Quantity);
+        setn2(response1.data.Tree2.Name);
+        seta2(response1.data.Tree2.Area);
+        setc2(response1.data.Tree2.Quantity);
+        setp1(response1.data.Plants[0]);
+        setp2(response1.data.Plants[1]);
+        setp3(response1.data.Plants[2]);
+        setp4(response1.data.Plants[3]);
       })
 
       .catch((error) => {
         console.log(error);
       });
   };
-
-  const imageFunc = () => {
-    if ({ text } === "Montane temperte forest") {
-      return image3;
-    }
-    if ({ text } === "Alpine forest") {
-      return image1;
-    }
-    if ({ text } === "Moist Tropical forest") {
-      return image5;
-    }
-    if ({ text } === "Dry tropical forest") {
-      return image2;
-    }
-    if ({ text } === "Montane sub tropical forest") {
-      return image4;
-    }
-  }
   return (
     <div id="carouselExampleCaptions" className="carousel slide">
       <div className="carousel-indicators">
@@ -185,20 +181,27 @@ function App() {
           <div className="overlay shadow-lg">
             <div className="container1">
               <h1 className=" text-center ">
-                <strong>Afforestation</strong>
+                <strong>Treesaurus</strong>
               </h1>
               <h5 className="d-flex justify-content-end">By CrankLever</h5>
             </div>
             <div className="container2 ">
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Dolores, esse aliquam consequuntur alias voluptatum quaerat
-                dignissimos commodi ab quo aperiam qui, at aspernatur ea
-                excepturi optio, porro sed provident ducimus iusto culpa. Quis,
-                animi! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Nobis rem quod praesentium aspernatur vero perspiciatis libero
-                ex quos maxime, omnis, blanditiis quis vel qui quasi ut expedita
-                voluptas, eum veniam?
+                Afforestation is a crucial aspect of environmental preservation
+                and sustainability. The process of planting trees in areas where
+                there was previously no forest provides numerous benefits to
+                both the environment and human communities. Firstly,
+                afforestation helps combat climate change by absorbing carbon
+                dioxide from the atmosphere, which is a major contributor to
+                global warming. Additionally, planting trees helps preserve
+                biodiversity by providing habitat for a wide range of wildlife
+                species. It also has a positive impact on air and water quality
+                by filtering pollutants and reducing soil erosion. Moreover,
+                afforestation provides numerous recreational opportunities and
+                can improve mental health by offering a peaceful and natural
+                environment for people to enjoy. These benefits demonstrate the
+                importance of afforestation and highlight the need for continued
+                efforts to protect and expand forests around the world.
               </p>
             </div>
           </div>
@@ -383,7 +386,7 @@ function App() {
             </div>
           </div>
         </div>
-        <div className="carousel-item active">
+        <div className="carousel-item">
           <div className="overlay1 shadow-lg">
             <div className="container5">
               <label for="inputPassword5" class="form-label mx-3">
@@ -412,11 +415,18 @@ function App() {
               </button>
             </div>
             <div className="container6">
-              <img
-                src={imageFunc()}
-                alt="logo"
-                className="forestimage"
-              />
+              <Image text={text} />
+              <h2 className="mx-1 my-1">Tree 1</h2>
+              <h5 className="mx-1">Name :{n1} </h5>
+              <h5 className="mx-1">Area :{a1} </h5>
+              <h5 className="mx-1 my-1">Quantity : {c1}</h5>
+              <h2 className="mx-1 my-1">Tree 2</h2>
+              <h5 className="mx-1">Name : {n2}</h5>
+              <h5 className="mx-1">Area : {a2}</h5>
+              <h5 className="mx-1">Quantity : {c2} </h5>
+              <h4>
+                Plants : {p1} , {p2} , {p3} , {p4}
+              </h4>
             </div>
           </div>
         </div>

@@ -61,6 +61,7 @@ p {
   top: 5%;
   right: 15%;
   left: 30%;
+  font-size: 13px;
 }
 .container3 {
   height: 100%;
@@ -169,6 +170,10 @@ p {
   width: 40%;
   right: 10px;
   bottom: 10px;
+  color: rgb(6, 6, 61);
+  background-color: #7ea0a2;
+}
 
-  background-color: white;
+h5 {
+  font-size: 15px;
 }
